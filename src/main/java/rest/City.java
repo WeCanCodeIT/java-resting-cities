@@ -22,6 +22,10 @@ public class City {
 		return name;
 	}
 
+	public State getState() {
+		return state;
+	}
+
 	public int getPopulation() {
 		return population;
 	}
