@@ -28,6 +28,7 @@ public class Populator implements CommandLineRunner {
 
 		State hawaii = new State("HI", "Hawaii", "The Islands of Aloha", "Humuhumunukunukuapua");
 		stateRepo.save(hawaii);
+		
 		City honolulu = new City("Honolulu", hawaii, 337256);
 		cityRepo.save(honolulu);
 

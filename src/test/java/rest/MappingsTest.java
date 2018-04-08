@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
-
 public class MappingsTest {
 
 	@Resource
@@ -53,17 +52,24 @@ public class MappingsTest {
 	public void shouldSaveAndLoadCitiesToState() {
 		
 		State stateUnderTest = new State("", "test name", "", "");
-		stateUnderTest = stateRepo.save(stateUnderTest);
+		stateRepo.save(stateUnderTest);
+		long stateId = stateUnderTest.getId();
 		
 		City cityUnderTest1 = new City("test name", stateUnderTest, 0);
-		cityUnderTest1 = cityRepo.save(cityUnderTest1);
+		cityRepo.save(cityUnderTest1);
 		
 		City cityUnderTest2 = new City("test name", stateUnderTest,0);
-		cityUnderTest2 = cityRepo.save(cityUnderTest2);
+		cityRepo.save(cityUnderTest2);
+		
+		entityManager.flush();
+		entityManager.clear();
+		
+		stateUnderTest= stateRepo.findOne(stateId);
 		
 		
 		assertThat(stateUnderTest.getCities(), containsInAnyOrder(cityUnderTest1, cityUnderTest2));
 		
 	}
 
+	
 }
