@@ -3,6 +3,8 @@ xhr.onreadystatechange = function() {
 	if (this.readyState === 4 && this.status === 200) {
 		const res = JSON.parse(xhr.response);
 		const container = document.querySelector('.container')
+		
+		console.log({ res })
 
 		res.forEach(function(state) {
 			const stateItem = document.createElement('div');
@@ -16,10 +18,14 @@ xhr.onreadystatechange = function() {
 			motto.innerText = `Motto: ${state.motto}`;
 			const fish = document.createElement('li');
 			fish.innerText = `Fish: ${state.fish}`;
-		
-			const citiesUrl = document.createElement('li');
-			citiesUrl.innerHTML = `Cities URL: <a href="${state.citiesUrl}">${state.citiesUrl}</a>`;
-
+			
+			const cityUrls = [];
+			state.citiesUrl.forEach(cityUrl => {
+				const cityUrlElem = document.createElement('li');
+				cityUrlElem.innerHTML = `City URL: <a href="${cityUrl}">${cityUrl}</a>`;
+				cityUrls.push(cityUrlElem);
+			});
+			
 			container.appendChild(stateItem);
 			
 			stateItem.appendChild(name);
@@ -28,7 +34,8 @@ xhr.onreadystatechange = function() {
 			stateInfo.appendChild(abbr);
 			stateInfo.appendChild(motto);
 			stateInfo.appendChild(fish);
-			stateInfo.appendChild(citiesUrl);
+			
+			cityUrls.forEach(cityUrl => stateInfo.appendChild(cityUrl));
 		})
 	}
 }
