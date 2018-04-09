@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
-public class MappingsTest {
+public class JpaMappingsTest {
 
 	@Resource
 	private TestEntityManager entityManager;
